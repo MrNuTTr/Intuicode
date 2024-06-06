@@ -30,7 +30,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "web"
           api_location: "api"
-          output_location: "web/build"
+          output_location: "web/dist"
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
@@ -46,4 +46,4 @@ jobs:
           action: "close"
           app_location: "web"
           api_location: "api"
-          output_location: "web/build"
+          output_location: "web/dist"
