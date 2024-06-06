@@ -68,6 +68,14 @@
 			}
 		},
 		{
+			"type": "npm",
+			"script": "dev",
+			"path": "web",
+			"problemMatcher": [],
+			"label": "npm: dev - web",
+			"detail": "vite"
+		},
+		{
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
@@ -76,14 +84,6 @@
 			"command": "host start",
 			"isBackground": true,
 			"problemMatcher": "$func-dotnet-watch"
-		},
-		{
-			"type": "npm",
-			"script": "dev",
-			"path": "web",
-			"problemMatcher": [],
-			"label": "npm: dev - web",
-			"detail": "vite"
 		}
 	]
 }
