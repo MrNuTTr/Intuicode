@@ -1,35 +1,49 @@
 import './header.css';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import type { Cart, User } from '../types';
-import { CartIcon, UserIcon } from './icons';
-import { CartDetails, UserDetails } from './details';
-import Logo802Png from '../assets/logo802.png';
+import { UserIcon } from './icons';
+import { UserDetails } from './details';
+import Logo64Png from '../assets/logo64.png';
 
 export const Header = ({ cart, user }: { cart: Cart; user?: User }) => {
     return (
-        <header className="bg-blue p-5 w-100 flex justify-between items-center">
-            <img src={Logo802Png} height="" className="header-image" />
-            <h1 className="text-yellow text-4xl font-bold leading-[28px]">
-                <span className="text-white">co</span>ducks
-            </h1>
+        <header className="bg-gray-700 p-5 w-100 flex justify-between items-center">
+            <div className="header-logo">
+                <img src={Logo64Png} width="64" />
+            </div>
             <NavigationMenu.Root className="">
                 <NavigationMenu.List className="flex gap-[10px] items-center justify-between text-xl">
                     <NavigationMenu.Item key="about" className="">
                         <NavigationMenu.Link
                             className="flex items-center pr-5 text-white hover:text-yellow"
-                            href="https://codux.com"
+                            href="/campaign"
                         >
-                            About us
+                            Campaign
                         </NavigationMenu.Link>
                     </NavigationMenu.Item>
-
-                    <NavigationMenu.Item key="cart" className="relative flex">
-                        <NavigationMenu.Trigger className="">
-                            <CartIcon cart={cart} />
-                        </NavigationMenu.Trigger>
-                        <NavigationMenu.Content className="w-max absolute right-0 top-10 py-[10px]  bg-white border-[1px] border-gray-med rounded-lg z-20">
-                            <CartDetails cart={cart} />
-                        </NavigationMenu.Content>
+                    <NavigationMenu.Item key="about" className="">
+                        <NavigationMenu.Link
+                            className="flex items-center pr-5 text-white hover:text-yellow"
+                            href="/challenges"
+                        >
+                            Challenges
+                        </NavigationMenu.Link>
+                    </NavigationMenu.Item>
+                    <NavigationMenu.Item key="about" className="">
+                        <NavigationMenu.Link
+                            className="flex items-center pr-5 text-white hover:text-yellow"
+                            href="/about"
+                        >
+                            About
+                        </NavigationMenu.Link>
+                    </NavigationMenu.Item>
+                    <NavigationMenu.Item key="about" className="">
+                        <NavigationMenu.Link
+                            className="flex items-center pr-5 text-white hover:text-yellow"
+                            href="/contact"
+                        >
+                            Contact
+                        </NavigationMenu.Link>
                     </NavigationMenu.Item>
 
                     <NavigationMenu.Item

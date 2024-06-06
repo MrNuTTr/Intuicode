@@ -2,3 +2,16 @@
     height: 10%;
     max-height: 10vh;
 }
+.header-logo {
+    max-height: 2%;
+    max-width: 30%;
+}
+.Header_grid {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    gap: 20px;
+}
+.header-logo-text {
+    position: sticky;
+    align-self: center;
+}
