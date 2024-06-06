@@ -1,0 +1,14 @@
+{
+    "configurations": [
+
+        {
+            "name": "SWA: Run web",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:4280",
+            "preLaunchTask": "swa: start web",
+            "webRoot": "${workspaceFolder}/web",
+            "timeout": 30000
+        }
+    ]
+}
