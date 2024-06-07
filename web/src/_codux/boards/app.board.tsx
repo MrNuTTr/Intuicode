@@ -4,7 +4,7 @@ import { RUBBER_DUCKY, SCROOGE } from '../../data';
 
 export default createBoard({
     name: 'App',
-    Board: () => <App product={RUBBER_DUCKY} user={SCROOGE} />,
+    Board: () => <App user={SCROOGE} />,
     isSnippet: true,
     environmentProps: {
         windowWidth: 1024,

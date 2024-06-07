@@ -7,10 +7,6 @@ export default createBoard({
     Board: () => (
         <div>
             <Header
-                cart={[
-                    { product: RUBBER_DUCKY, size: 'S', quantity: 2 },
-                    { product: RUBBER_DUCKY, size: 'XL', quantity: 1 },
-                ]}
                 user={SCROOGE}
             />
         </div>

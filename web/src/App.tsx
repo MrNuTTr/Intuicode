@@ -18,7 +18,7 @@ function App({ user }: { user: User }) {
                 <Header user={user} />
 
                 <div className="text-center pt-4">
-                    <Coderunner code={code} />
+                    <Coderunner code={code} onResult={() => (console.log('test')) } />
                 </div>
 
                 <main className="grid grid-cols-1 md:grid-cols-2 grid-rows-auto gap-2 w-screen p-5">
