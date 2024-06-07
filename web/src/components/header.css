@@ -1,17 +1,35 @@
-.header-image {
-    height: 10%;
-    max-height: 10vh;
+.header-container {
+    background-color: var(--gray-1);
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-7);
 }
 .header-logo {
     max-height: 2%;
-    max-width: 30%;
-}
-.Header_grid {
-    display: grid;
-    grid-template: 1fr / 1fr 1fr;
-    gap: 20px;
+    max-width: 45px;
+    margin-right: 10px;
 }
 .header-logo-text {
     position: sticky;
     align-self: center;
+}
+.header-logo-text:hover {
+    color: var(--accent-10);
+}
+.nav-menu-item {
+    text-align: center;
+    font-size: calc(18px * 1);
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+.logo-and-nav {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

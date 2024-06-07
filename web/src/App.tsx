@@ -1,31 +1,32 @@
-import { Header } from "./components/header";
-import { Images } from "./components/images";
-import { ProductInfo } from "./components/product-info";
-import { useCart } from "./hooks";
-import type { Product, User } from "./types";
+import './App.css';
+import { Header } from './components/header';
+import { Images } from './components/images';
+import { ProductInfo } from './components/product-info';
+import { useState } from 'react';
+import type { User } from './types';
+import CodeEditor from './components/editor';
+import '@radix-ui/themes/styles.css';
+import { Theme, Button } from '@radix-ui/themes';
+import Coderunner from './components/coderunner';
 
-function App({ product, user }: { product: Product; user: User }) {
-  const [cart, addToCart] = useCart();
+function App({ user }: { user: User }) {
+    const [code, setCode] = useState('');
 
-  return (
-    <div>
-      <Header cart={cart} user={user} />
+    return (
+        <Theme accentColor="brown" grayColor="mauve" radius="small" appearance="dark">
+            <div>
+                <Header user={user} />
 
-      <main className="grid grid-cols-1 md:grid-cols-2 grid-rows-auto gap-2">
-        <Images images={product.images} />
-        <ProductInfo product={product} addToCart={addToCart} />
-      </main>
+                <div className="text-center pt-4">
+                    <Coderunner code={code} />
+                </div>
 
-      <footer className="text-center text-sm p-5">
-        Made with ♥ in&nbsp;
-        <a href="https://codux.com">Codux</a>
-        &nbsp;with&nbsp;
-        <a href="https://radix-ui.com">RadixUI</a>
-        &nbsp;and&nbsp;
-        <a href="https://tailwindcss.com">TailwindCSS</a>
-      </footer>
-    </div>
-  );
+                <main className="grid grid-cols-1 md:grid-cols-2 grid-rows-auto gap-2 w-screen p-5">
+                    <CodeEditor language="python" code={code} />
+                </main>
+            </div>
+        </Theme>
+    );
 }
 
 export default App;
