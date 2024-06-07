@@ -61,9 +61,6 @@ export const Header = ({ user }: { user?: User }) => {
                     <NavigationMenu.Trigger className="">
                         <UserIcon />
                     </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="w-max absolute right-0 top-10 py-[10px] px-4 bg-white border-[1px] border-gray-med rounded-lg z-20">
-                        <UserDetails user={user} />
-                    </NavigationMenu.Content>
                 </NavigationMenu.Item>
             </NavigationMenu.Root>
         </header>

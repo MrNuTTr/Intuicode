@@ -19,8 +19,9 @@ const CodeRunner: React.FC<CodeRunnerProps> = ({ code, onResult }) => {
                 },
                 body: JSON.stringify({ code }),
             });
-            const result = await response.json();
-            onResult(result);
+            const json = await response.json();
+            console.log(json.result);
+            onResult(json.result);
         } catch (error) {
             console.error('Error:', error);
         } finally {
