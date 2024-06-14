@@ -5,65 +5,46 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Python.Runtime;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System;
+using System.Net.Http;
+using System.Text;
 
 namespace Intuicode.CodeRunner
 {
     public class RunCodeFunction
     {
+        private string _codeAuthToken = Environment.GetEnvironmentVariable("CODE_RUN_TOKEN");
+        private string _pythonRunUrlBase = Environment.GetEnvironmentVariable("PYTHON_RUN_URL_BASE");
+
         [FunctionName("RunCode")]
         public async Task<IActionResult> RunCode(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "runcode")] HttpRequest req,
             ILogger log)
         {
-            if (PythonEngine.IsInitialized == false) 
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(requestBody);
+
+            string runUrl = "";
+            switch (data["language"])
             {
-                Runtime.PythonDLL = "python311.dll";
-                PythonEngine.Initialize();
+                case "python":
+                    runUrl = $"{_pythonRunUrlBase}/run";
+                    break;
+                default:
+                    return new BadRequestObjectResult("Unsupported language");
             }
 
-            string requestBody = string.Empty;
-            using (StreamReader streamReader = new StreamReader(req.Body))
+            using (var client = new HttpClient())
             {
-                requestBody = await streamReader.ReadToEndAsync();
+                client.DefaultRequestHeaders.Add("X-Auth-Token", _codeAuthToken);
+                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(runUrl, content);
+                var apiResponse = await response.Content.ReadAsStringAsync();
+
+                return new OkObjectResult(apiResponse);
             }
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            string pythonCode = data.code;
-            string codeResult = "";
-
-            using (Py.GIL())
-            {
-                using (PyModule scope = Py.CreateScope())
-                {
-                    dynamic io = scope.Import("io");
-                    dynamic sys = scope.Import("sys");
-
-                    // Create a StringIO object
-                    dynamic stringIO = io.StringIO();
-
-                    // Redirect stdout and stderr
-                    sys.stdout = sys.stderr = stringIO;
-
-                    // Run the Python code
-                    scope.Exec(pythonCode);
-
-                    // Get the console output
-                    codeResult = stringIO.getvalue();
-
-                    // Reset stdout and stderr
-                    sys.stdout = sys.__stdout__;
-                    sys.stderr = sys.__stderr__;
-                }
-            }
-
-            var returnResult = new Dictionary<string, string>()
-            {
-                { "result", codeResult }
-            };
-
-            return new OkObjectResult(returnResult);
         }
     }
 }

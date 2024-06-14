@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import { Button } from '@radix-ui/themes';
 import axios from 'axios';
+import { CodeResult } from '../interfaces/CodeResult';
 
 interface CodeRunnerProps {
     code: string;
-    onResult: (result: any) => void;
+    testCode: string;
+    language: string;
+    onResult: (result: CodeResult) => void;
 }
 
-const CodeRunner: React.FC<CodeRunnerProps> = ({ code, onResult }) => {
+const CodeRunner: React.FC<CodeRunnerProps> = ({ code, testCode, language, onResult }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const runCode = async () => {
+    const runCode = () => {
         setIsLoading(true);
-        try {
-            const response = await axios.post('/api/runcode', { code });
-            console.log(response.data.result);
-            onResult(response.data.result);
-        } catch (error) {
-            console.error('Error:', error);
-        } finally {
-            setIsLoading(false);
-        }
+        axios.post('/api/runcode', {
+            "language": language, "userCode": code, "testCode": testCode
+        })
+            .then(response => {
+                onResult(response.data);
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     };
 
     return (

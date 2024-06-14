@@ -1,0 +1,19 @@
+{
+    "id": "1",
+    "category": "campaign",
+    "name": "Introduction",
+    "description": "Introduction",
+    "startCode": {
+        "python": "print(\"hello world\")"
+    },
+    "testCode": {
+        "python": "\nimport sys\nfrom io import StringIO\nold_stdout = sys.stdout\nsys.stdout = StringIO()\nexec(user_code)\noutput = sys.stdout.getvalue().strip()\nsys.stdout = old_stdout\nassert output == 'hello world'\n"
+    },
+    "hints": [
+        "Just hit the run button :)"
+    ],
+    "tags": [
+        "print",
+        "beginner"
+    ]
+}

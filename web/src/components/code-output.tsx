@@ -1,23 +1,25 @@
 import * as React from 'react';
+import { CodeResult } from '../interfaces/CodeResult';
 import { Text } from '@radix-ui/themes'
 
 interface CodeOutputProps {
-    text: string;
+    result: CodeResult;
 }
 
-// Define the React component
-const CodeOutput: React.FC<CodeOutputProps> = ({ text }) => {
-    return <Text style={{
-        backgroundColor: 'var(--gray-2)',
-        color: '#fff',
-        border: 'none',
-        resize: 'none',
-        width: '100%',
-        height: '100%',
-        fontFamily: 'Monaco, monospace'
-    }}>
-        {text}
-    </Text>;
+const CodeOutput: React.FC<CodeOutputProps> = ({ result }) => {
+    return (
+        <div style={{
+            backgroundColor: 'var(--gray-2)',
+            border: 'none',
+            resize: 'none',
+            width: '100%',
+            height: '100%',
+            fontFamily: 'Monaco, monospace'
+        }}>
+            <Text style={{ color: '#fff' }}>{result.stdout}</Text>
+            {!result.success && <Text style={{ color: 'red' }}>{'\n\n' + result.stderr}</Text>}
+        </div>
+    );
 };
 
 export default CodeOutput;

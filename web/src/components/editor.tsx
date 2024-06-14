@@ -1,20 +1,26 @@
 import React from 'react';
-//import 'monaco-editor/esm/vs/basic-languages/monaco.contribution';
+import 'monaco-editor/esm/vs/basic-languages/monaco.contribution';
 import MonacoEditor from 'react-monaco-editor';
 import * as monaco from 'monaco-editor';
 
 interface EditorProps {
     code: string;
     language: string;
+    onCodeChange: (newCode: string) => void;
 }
 
 class CodeEditor extends React.Component<EditorProps> {
+    constructor(props: EditorProps) {
+        super(props);
+        this.onChange = this.onChange.bind(this);
+    }
+
     editorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
         editor.focus();
     }
 
     onChange(newValue: string, e: monaco.editor.IModelContentChangedEvent) {
-        console.log('Content changed:', newValue);
+        this.props.onCodeChange(newValue);
     }
 
     render() {

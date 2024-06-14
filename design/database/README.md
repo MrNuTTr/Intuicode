@@ -1,0 +1,2 @@
+# Database Design
+This is a rough outline of how the NoSQL data is structured in Cosmos DB. Folders signify containers, whilst json documents represent the structure of documents contained in those containers. 
