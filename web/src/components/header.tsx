@@ -1,12 +1,10 @@
 import './header.css';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import type { User } from '../types';
 import { UserIcon } from './icons';
-import { UserDetails } from './details';
 import { Text } from '@radix-ui/themes';
 import Logo64Png from '../assets/logo64.png';
 
-export const Header = ({ user }: { user?: User }) => {
+export const Header = () => {
     return (
         <header className="header-container">
             <div className="logo-and-nav">

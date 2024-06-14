@@ -1,0 +1,18 @@
+.title-text {
+    position: static;
+    text-align: center;
+    display: block;
+    overflow: visible;
+    align-self: center;
+    font-size: 8vh;
+    margin-top: 0%;
+}
+.under-text {
+    margin-top: 3vh;
+    text-align: center;
+}
+.title-button {
+    text-align: center;
+    align-self: center;
+    display: block;
+}

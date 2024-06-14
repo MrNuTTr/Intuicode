@@ -14,6 +14,7 @@ const CodeOutput: React.FC<CodeOutputProps> = ({ text }) => {
         resize: 'none',
         width: '100%',
         height: '100%',
+        fontFamily: 'Monaco, monospace'
     }}>
         {text}
     </Text>;
