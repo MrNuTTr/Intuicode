@@ -1,0 +1,7 @@
+{
+    "id": "<CompletedPuzzlesId>",
+    "completedPuzzles": [
+        "<PuzzleId>",
+        "<PuzzleId>"
+    ]
+}

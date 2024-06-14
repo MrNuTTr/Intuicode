@@ -1,0 +1,19 @@
+{
+    "id": "<PuzzleId>",
+    "category": "campaign <or> challenge",
+    "name": "Puzzle Name Here",
+    "description": "Puzzle document layout",
+    "startCode": {
+        "python": "print(\"hello world\")"
+    },
+    "testCode": {
+        "python": "(<inputCode>).shouldBe(\"hello world\")"
+    },
+    "hints": [
+        "This is a really good hint"
+    ],
+    "tags": [
+        "print",
+        "beginner"
+    ]
+}

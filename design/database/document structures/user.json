@@ -1,0 +1,6 @@
+{
+    "id": "<UserId>",
+    "completedPuzzles": "<CompletedPuzzlesId>",
+    "hintsAvailable": 5,
+    "freeSolves": 1
+}

@@ -9,13 +9,13 @@ using Python.Runtime;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace IntuiCode.CodeRunner
+namespace Intuicode.CodeRunner
 {
-    public static class CodeRunner
+    public class RunCodeFunction
     {
-        [FunctionName("CodeRunner")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+        [FunctionName("RunCode")]
+        public async Task<IActionResult> RunCode(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "runcode")] HttpRequest req,
             ILogger log)
         {
             if (PythonEngine.IsInitialized == false) 
