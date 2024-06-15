@@ -5,6 +5,10 @@
             "allowedRoles": [
                 "administrator"
             ]
+        },
+        {
+            "route": "/api/runcode",
+            "allowedRoles": ["authenticated", "administrator"]
         }
     ],
     "navigationFallback": {

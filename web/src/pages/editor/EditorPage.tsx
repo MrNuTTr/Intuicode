@@ -12,7 +12,7 @@ function EditorPage() {
     const location = useLocation();
     const [code, setCode] = useState('');
     const [testCode, setTestCode] = useState('');
-    const [output, setOutput] = useState<CodeResult>({ success: true, stdout: '', stderr: '' });
+    const [output, setOutput] = useState<CodeResult>({ success: true, reason: '', stdout: '', stderr: '' });
     const [puzzle, setPuzzle] = useState<string | null>(null);
     const [languages, setLanguages] = useState<string[]>([]);
     const [selectedLanguage, setSelectedLanguage] = useState<string>('');

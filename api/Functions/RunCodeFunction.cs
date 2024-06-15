@@ -20,7 +20,7 @@ namespace Intuicode.CodeRunner
 
         [FunctionName("RunCode")]
         public async Task<IActionResult> RunCode(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "runcode")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.User, "post", Route = "runcode")] HttpRequest req,
             ILogger log)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();

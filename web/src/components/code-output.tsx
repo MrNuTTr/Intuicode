@@ -17,7 +17,7 @@ const CodeOutput: React.FC<CodeOutputProps> = ({ result }) => {
             fontFamily: 'Monaco, monospace'
         }}>
             <Text style={{ color: '#fff' }}>{result.stdout}</Text>
-            {!result.success && <Text style={{ color: 'red' }}>{'\n\n' + result.stderr}</Text>}
+            {!result.success && <Text style={{ color: 'red' }}>{'\n\n' + (result.reason === 'timeout' ? 'Code timeout' : result.stderr)}</Text>}
         </div>
     );
 };
