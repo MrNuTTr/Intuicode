@@ -1,10 +1,25 @@
 import './header.css';
+import * as React from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { UserIcon } from './icons';
-import { Text } from '@radix-ui/themes';
+import LoginButton from './login-button';
+import { Button, Text } from '@radix-ui/themes';
 import Logo64Png from '../assets/logo64.png';
 
 export const Header = () => {
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+    const handleLogin = () => {
+        // Handle login here
+        setIsLoggedIn(true);
+    };
+
+    const handleLogout = () => {
+        // Handle logout here
+        setIsLoggedIn(false);
+    };
+
     return (
         <header className="header-container">
             <div className="logo-and-nav">
@@ -54,13 +69,17 @@ export const Header = () => {
                     </NavigationMenu.List>
                 </NavigationMenu.Root>
             </div>
-            <NavigationMenu.Root className="logo-and-nav">
-                <NavigationMenu.Item key="account" className="relative flex">
-                    <NavigationMenu.Trigger className="">
-                        <UserIcon />
-                    </NavigationMenu.Trigger>
-                </NavigationMenu.Item>
-            </NavigationMenu.Root>
+            {isLoggedIn ? (
+                <DropdownMenu.Root>
+                    <DropdownMenu.Trigger>Open</DropdownMenu.Trigger>
+                    <DropdownMenu.Content>
+                        <DropdownMenu.Item onSelect={() => console.log('Do something')}>Item 1</DropdownMenu.Item>
+                        <DropdownMenu.Item onSelect={() => console.log('Do something else')}>Item 2</DropdownMenu.Item>
+                    </DropdownMenu.Content>
+                </DropdownMenu.Root>
+            ) : (
+                <LoginButton></LoginButton>
+            )}
         </header>
     );
 };

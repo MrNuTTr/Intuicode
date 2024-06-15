@@ -5,6 +5,7 @@ import type { User } from '../../types';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import { Button } from '@radix-ui/themes';
+import LoginButton from '../../components/login-button';
 
 function HomePage() {
     const [code, setCode] = useState('');
@@ -17,6 +18,7 @@ function HomePage() {
             <div className="title-button">
                 <Button>Start coding</Button>
             </div>
+            <LoginButton></LoginButton>
         </div>
     );
 }

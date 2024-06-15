@@ -1,0 +1,9 @@
+.closeButton {
+    position: absolute;
+    top: 1vh;
+    right: 1.5vh;
+}
+
+.center {
+    text-align: center;
+}
