@@ -4,19 +4,28 @@ import { Spinner, Theme } from '@radix-ui/themes';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EditorPage from './pages/editor/EditorPage';
 import HomePage from './pages/home/HomePage';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 
 function App() {
+    //document.body.classList.remove('dark');
+    document.body.classList.add('dark');
+
+    let dark = 'light';
+    if (document.body.classList.contains('dark')) {
+        dark = 'dark';
+    }
 
     return (
         <Router>
-            <Theme accentColor="brown" grayColor="sand" radius="medium" appearance="dark">
-                <Suspense fallback={<Spinner/>}>
+            <Theme
+                accentColor="brown"
+                grayColor="sand"
+                radius="medium"
+                appearance={dark as 'light' | 'dark'}>
                     <Routes>
                         <Route path="/" Component={HomePage} />
                         <Route path="/editor" Component={EditorPage} />
                     </Routes>
-                </Suspense>
             </Theme>
         </Router>
     );

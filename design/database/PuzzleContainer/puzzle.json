@@ -4,7 +4,10 @@
     "name": "Introduction",
     "description": "Introduction",
     "startCode": {
-        "python": "print(\"hello world\")"
+        "python": {
+            "code": "print(\"hello world\")",
+            "timeoutSeconds": 1 
+        }
     },
     "testCode": {
         "python": "\nimport sys\nfrom io import StringIO\nold_stdout = sys.stdout\nsys.stdout = StringIO()\nexec(user_code)\noutput = sys.stdout.getvalue().strip()\nsys.stdout = old_stdout\nassert output == 'hello world'\n"
