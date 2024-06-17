@@ -1,7 +1,6 @@
 import React from 'react';
-import 'monaco-editor/esm/vs/basic-languages/monaco.contribution';
-import MonacoEditor from 'react-monaco-editor';
-import * as monaco from 'monaco-editor';
+import MonacoEditorThemed from './monaco-themed';
+import { monaco } from 'react-monaco-editor';
 
 interface EditorProps {
     code: string;
@@ -15,11 +14,7 @@ class CodeEditor extends React.Component<EditorProps> {
         this.onChange = this.onChange.bind(this);
     }
 
-    editorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
-        editor.focus();
-    }
-
-    onChange(newValue: string, e: monaco.editor.IModelContentChangedEvent) {
+    onChange(newValue: string) {
         this.props.onCodeChange(newValue);
     }
 
@@ -31,18 +26,16 @@ class CodeEditor extends React.Component<EditorProps> {
             readOnly: false,
             cursorStyle: 'line' as 'line',
             automaticLayout: true,
-            minimap: { enabled: false }
+            minimap: { enabled: false },
+            scrollbar: { horizontal: "auto" }
         };
 
         return (
-            <MonacoEditor
-                height='84vh'
-                language='python'
-                theme='vs-dark'
+            <MonacoEditorThemed
+                language={language}
                 value={code}
                 options={options}
                 onChange={this.onChange}
-                editorDidMount={this.editorDidMount}
             />
         );
     }

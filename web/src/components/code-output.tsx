@@ -1,8 +1,8 @@
 import * as React from 'react';
 import 'monaco-editor/esm/vs/basic-languages/monaco.contribution';
-import MonacoEditor from 'react-monaco-editor';
 import * as monaco from 'monaco-editor';
 import { CodeResult } from '../interfaces/CodeResult';
+import MonacoEditorThemed from './monaco-themed';
 
 interface CodeOutputProps {
     result: CodeResult;
@@ -32,12 +32,6 @@ const CodeOutput: React.FC<CodeOutputProps> = ({ result }) => {
         output = 'There was a problem with the code execution server. Please try again or ask for support.';
     }
 
-
-    let theme = 'vs'
-    if (document.body.classList.contains('dark')) {
-        theme = 'vs-dark'
-    }
-
     const options: monaco.editor.IStandaloneEditorConstructionOptions = {
         selectOnLineNumbers: true,
         lineNumbers: 'off',
@@ -49,15 +43,11 @@ const CodeOutput: React.FC<CodeOutputProps> = ({ result }) => {
     };
 
     return (
-        <div>
-            <MonacoEditor
-                height='84vh'
-                language=''
-                theme={theme}
-                value={output}
-                options={options}
-            />
-        </div>
+        <MonacoEditorThemed
+            language=''
+            value={output}
+            options={options}
+        />
     );
 };
 

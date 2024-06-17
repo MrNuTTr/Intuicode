@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EditorPage from './pages/editor/EditorPage';
 import HomePage from './pages/home/HomePage';
 import { Suspense, useState } from 'react';
+import PuzzleEditorPage from './pages/admin/PuzzleEditorPage';
 
 function App() {
     //document.body.classList.remove('dark');
@@ -25,6 +26,7 @@ function App() {
                     <Routes>
                         <Route path="/" Component={HomePage} />
                         <Route path="/editor" Component={EditorPage} />
+                        <Route path="/admin/puzzleEditor" Component={PuzzleEditorPage} />
                     </Routes>
             </Theme>
         </Router>

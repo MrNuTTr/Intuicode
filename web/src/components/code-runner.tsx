@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@radix-ui/themes';
 import axios from 'axios';
 import { CodeResult } from '../interfaces/CodeResult';
+import { PlayIcon } from '@radix-ui/react-icons';
 
 interface CodeRunnerProps {
     code: string;
@@ -43,7 +44,7 @@ const CodeRunner: React.FC<CodeRunnerProps> = ({ code, testCode, language, timeo
 
     return (
         <Button onClick={runCode} disabled={isLoading}>
-            {isLoading ? 'Running...' : 'Run Code'}
+            {isLoading ? 'Running...' : [<PlayIcon/>, 'Run Code'] }
         </Button>
     );
 };

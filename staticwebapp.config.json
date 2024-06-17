@@ -1,18 +1,14 @@
 {
     "routes": [
         {
-            "route": "/admin",
+            "route": "/admin*",
             "allowedRoles": [
                 "administrator"
             ]
         }
     ],
     "navigationFallback": {
-        "rewrite": "index.html",
-        "exclude": [
-            "/static/media/*.{png,jpg,gif,svg}",
-            "/static/css/*"
-        ]
+        "rewrite": "index.html"
     },
     "responseOverrides": {
         "400": {

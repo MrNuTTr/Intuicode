@@ -12,7 +12,7 @@ function HomePage() {
     const [output, setOutput] = useState('');
 
     return (
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
             <h1 className="title-text">Intuicode</h1>
             <h2 className="under-text">Learn to code, intuitively.</h2>
             <div className="title-button">
