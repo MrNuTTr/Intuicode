@@ -24,7 +24,7 @@ namespace Intuicode.CodeRunner
             ILogger log)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var data = JsonConvert.DeserializeObject<Dictionary<string, string>>(requestBody);
+            var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(requestBody);
 
             string runUrl = "";
             switch (data["language"])

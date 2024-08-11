@@ -3,17 +3,17 @@ import { Button } from '@radix-ui/themes';
 import axios from 'axios';
 import { CodeResult } from '../interfaces/CodeResult';
 import { PlayIcon } from '@radix-ui/react-icons';
+import { TestCase } from 'src/interfaces/Puzzle';
 
 interface CodeRunnerProps {
     code: string;
-    testCode: string;
+    testCode: TestCase[];
     language: string;
-    timeout: number;
     onClick: (result: CodeResult) => void;
     onResult: (result: CodeResult) => void;
 }
 
-const CodeRunner: React.FC<CodeRunnerProps> = ({ code, testCode, language, timeout, onClick, onResult }) => {
+const CodeRunner: React.FC<CodeRunnerProps> = ({ code, testCode, language, onClick, onResult }) => {
     const [isLoading, setIsLoading] = useState(false);
     let errorResult: CodeResult = {
         success: false,
@@ -28,7 +28,7 @@ const CodeRunner: React.FC<CodeRunnerProps> = ({ code, testCode, language, timeo
         onClick(blankResult);
         setIsLoading(true);
         axios.post('/api/runcode', {
-            "language": language, "timeout_seconds": timeout, "userCode": code, "testCode": testCode
+            "language": language, "userCode": code, "testCases": testCode
         })
             .then(response => {
                 onResult(response.data);
@@ -44,7 +44,7 @@ const CodeRunner: React.FC<CodeRunnerProps> = ({ code, testCode, language, timeo
 
     return (
         <Button onClick={runCode} disabled={isLoading}>
-            {isLoading ? 'Running...' : [<PlayIcon/>, 'Run Code'] }
+            {isLoading ? 'Running...' : [<PlayIcon key="coderunner-icon"/>, 'Run Code'] }
         </Button>
     );
 };

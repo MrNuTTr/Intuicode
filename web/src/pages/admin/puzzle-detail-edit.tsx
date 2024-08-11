@@ -1,5 +1,5 @@
-import { Button, Dialog, DropdownMenu, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
-import { Cross2Icon, RowsIcon, TrashIcon } from '@radix-ui/react-icons';
+import { Button, Dialog, DropdownMenu, Flex, SegmentedControl, Text, TextArea, TextField } from '@radix-ui/themes';
+import { Cross2Icon, InputIcon, RowsIcon, TrashIcon } from '@radix-ui/react-icons';
 import { PuzzleCode, PuzzleModel } from '../../interfaces/Puzzle';
 import { useEffect, useState } from 'react';
 
@@ -11,15 +11,21 @@ interface PuzzleDetailEditProps {
 const PuzzleDetailEdit: React.FC<PuzzleDetailEditProps> = ({ puzzle, onSave }) => {
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
+    const [difficulty, setDifficulty] = useState(0);
     const [description, setDescription] = useState('');
+    const [sequenceNumber, setSequenceNumber] = useState(1000);
     const [hints, setHints] = useState<string[]>([]);
     const [tags, setTags] = useState<string[]>([]);
 
+    const categories = ['campaign', 'challenge', 'hidden'];
+    const difficulties = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
     const reset = () => {
         setName(puzzle.name);
-        let categoryCapitalized = puzzle.category.charAt(0).toUpperCase() + puzzle.category.slice(1);
-        setCategory(categoryCapitalized);
+        setCategory(puzzle.category);
+        setDifficulty(puzzle.difficulty);
         setDescription(puzzle.description);
+        setSequenceNumber(puzzle.sequenceNumber);
         setHints(puzzle.hints);
         setTags(puzzle.tags);
     }
@@ -54,7 +60,9 @@ const PuzzleDetailEdit: React.FC<PuzzleDetailEditProps> = ({ puzzle, onSave }) =
 
     const save = () => {
         puzzle.name = name;
-        puzzle.category = category.toLowerCase();
+        puzzle.category = category;
+        puzzle.difficulty = difficulty;
+        puzzle.sequenceNumber = sequenceNumber;
         puzzle.description = description;
         puzzle.hints = hints;
         puzzle.tags = tags.map(tag => tag.toLowerCase());
@@ -63,14 +71,14 @@ const PuzzleDetailEdit: React.FC<PuzzleDetailEditProps> = ({ puzzle, onSave }) =
     }
 
     return (
-        < Dialog.Root >
+        <Dialog.Root>
             <Dialog.Trigger>
                 <Button
                     variant="soft"
                     onClick={reset}
                 >
-                    <RowsIcon />
-                    Edit Details
+                    <InputIcon />
+                    Details
                 </Button>
             </Dialog.Trigger>
 
@@ -93,22 +101,33 @@ const PuzzleDetailEdit: React.FC<PuzzleDetailEditProps> = ({ puzzle, onSave }) =
                         <Text as="div" size="2" mb="1" weight="bold">
                             Category
                         </Text>
-                        <DropdownMenu.Root>
-                            <DropdownMenu.Trigger>
-                                <Button variant='outline'>
-                                    {category}
-                                    <DropdownMenu.TriggerIcon />
-                                </Button>
-                            </DropdownMenu.Trigger>
-                            <DropdownMenu.Content>
-                                <DropdownMenu.Item onSelect={() => setCategory('Campaign')}>
-                                    <Text>Campaign</Text>
-                                </DropdownMenu.Item>
-                                <DropdownMenu.Item onSelect={() => setCategory('Challenge')}>
-                                    <Text>Challenge</Text>
-                                </DropdownMenu.Item>
-                            </DropdownMenu.Content>
-                        </DropdownMenu.Root>
+                        <SegmentedControl.Root defaultValue={category}>
+                            {categories.map(category => (
+                                <SegmentedControl.Item
+                                    key={category}
+                                    value={category}
+                                    onClick={() => setCategory(category)}
+                                >
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                                </SegmentedControl.Item>
+                            ))}
+                        </SegmentedControl.Root>
+                    </label>
+                    <label>
+                        <Text as="div" size="2" mb="1" weight="bold">
+                            Difficulty
+                        </Text>
+                        <SegmentedControl.Root defaultValue={String(difficulty)}>
+                            {difficulties.map(difficulty => (
+                                <SegmentedControl.Item
+                                    key={difficulty}
+                                    value={String(difficulty)}
+                                    onClick={() => setDifficulty(Number(difficulty))}
+                                >
+                                    {difficulty}
+                                </SegmentedControl.Item>
+                            ))}
+                        </SegmentedControl.Root>
                     </label>
                     <label>
                         <Text as="div" size="2" mb="1" weight="bold">
@@ -119,6 +138,22 @@ const PuzzleDetailEdit: React.FC<PuzzleDetailEditProps> = ({ puzzle, onSave }) =
                             placeholder="A short (or long) description of the puzzle."
                             value={description}
                             onChange={(event) => setDescription(event.target.value)}
+                        />
+                    </label>
+                    <label>
+                        <Text as="div" size="2" mb="1" weight="bold">
+                            Sequence Number
+                        </Text>
+                        <TextField.Root
+                            defaultValue=""
+                            placeholder="1000"
+                            value={sequenceNumber}
+                            onChange={(event) => {
+                                const value = Number(event.target.value);
+                                if (!isNaN(value)) {
+                                    setSequenceNumber(value);
+                                }
+                            }}
                         />
                     </label>
                     <div>

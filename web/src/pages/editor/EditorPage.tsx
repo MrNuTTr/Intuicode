@@ -8,7 +8,7 @@ import CodeOutput from '../../components/code-output';
 import { CodeResult } from '../../interfaces/CodeResult';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { PuzzleCode, PuzzleModel } from '../../interfaces/Puzzle';
+import { PuzzleCode, PuzzleModel, TestCase } from '../../interfaces/Puzzle';
 
 
 function EditorPage() {
@@ -20,18 +20,24 @@ function EditorPage() {
     const [selectedLanguage, setSelectedLanguage] = useState<string>('');
 
     const [puzzleId, setPuzzleId] = useState<string | null>('');
-    const [puzzleCode, setPuzzleCode] = useState<PuzzleCode>({
+    const [testCase, setTestCase] = useState<TestCase>({
         timeoutSeconds: 0,
+        setupCode: '',
+        testCode: '',
+        hidden: true
+    });
+    const [puzzleCode, setPuzzleCode] = useState<PuzzleCode>({
         startCode: '',
-        assertCode: ''
-    })
+        testCases: []
+    });
     const [puzzle, setPuzzle] = useState<PuzzleModel>({
         id: '',
         name: '',
         category: '',
+        difficulty: 0,
         description: '',
         sequenceNumber: 0,
-        code: { puzzleCode },
+        code: {},
         hints: [],
         tags: []
     });
@@ -82,9 +88,8 @@ function EditorPage() {
                 <Skeleton loading={true}>
                     <Coderunner
                         code={code}
-                        testCode={puzzleCode.assertCode}
+                        testCode={puzzleCode.testCases}
                         language={selectedLanguage}
-                        timeout={puzzleCode.timeoutSeconds}
                         onClick={(result: CodeResult) => {
                             setOutput(result);
                         }}

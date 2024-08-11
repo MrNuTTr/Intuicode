@@ -1,22 +1,27 @@
 {
     "id": "1",
+    "name": "Variables",
     "category": "campaign",
-    "name": "Introduction",
-    "description": "Introduction",
-    "startCode": {
+    "difficulty": 0,
+    "description": "Learn how to assign variables.",
+    "sequenceNumber": 200,
+    "code": {
         "python": {
-            "code": "print(\"hello world\")",
-            "timeoutSeconds": 1 
+            "startCode": "hello = 'hello world'\r\nprint('hello world')",
+            "testCases": [
+                {
+                    "timeoutSeconds": 3,
+                    "setupCode": "",
+                    "testCode": "assert stdout.upper() == 'HELLO WORLD\\n', \"You should be printing the phrase 'hello world'\"\r\nassert 'hello' in variables and variables['hello'].upper() == 'HELLO WORLD', \"Variable 'hello' should have the value 'hello world'\"\r\nassert_passed = True\r\nhelp_message = ''",
+                    "hidden": false
+                }
+            ]
         }
     },
-    "testCode": {
-        "python": "\nimport sys\nfrom io import StringIO\nold_stdout = sys.stdout\nsys.stdout = StringIO()\nexec(user_code)\noutput = sys.stdout.getvalue().strip()\nsys.stdout = old_stdout\nassert output == 'hello world'\n"
-    },
     "hints": [
-        "Just hit the run button :)"
+        "Everything inside the 'quotes' is a string, and not case sensitive. Everything else is."
     ],
     "tags": [
-        "print",
-        "beginner"
+        "print"
     ]
 }

@@ -11,16 +11,21 @@ interface ResizableMonacoEditorProps {
     onChange?: (newValue: string) => void;
 }
 
-const MonacoEditorThemed: React.FC<ResizableMonacoEditorProps> = ({ value, language, options, onChange }) => {
+const MonacoEditorThemed: React.FC<ResizableMonacoEditorProps> = ({
+    value,
+    language,
+    options = {},
+    onChange = () => { }
+}) => {
     const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-    let theme = 'vs'
+    let theme = 'vs';
     if (document.body.classList.contains('dark')) {
-        theme = 'vs-dark'
+        theme = 'vs-dark';
     }
 
     return (
-        <div style={{width: "100%", height: "95%"}}>
+        <div style={{ width: '100%', height: '95%' }}>
             <MonacoEditor
                 language={language}
                 theme={theme}
@@ -32,7 +37,6 @@ const MonacoEditorThemed: React.FC<ResizableMonacoEditorProps> = ({ value, langu
                 }}
             />
         </div>
-        
     );
 };
 
